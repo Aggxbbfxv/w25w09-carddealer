@@ -9,9 +9,13 @@
 </head>
 <body>
     <h3>카드</h3>
-<img
-    th:src="@{/images/{imageName}(imageName=${cards})}"
-    alt="카드 이미지"
-    width="200px"/>
+    <div style="display: flex;">
+        <div th:each="card : ${cards}">
+            <img
+                th:src="@{/images/{imageName}(imageName=${card})}"
+                alt="카드 이미지"
+                width="200px"/>
+        </div>
+    </div>
 </body>
 </html>

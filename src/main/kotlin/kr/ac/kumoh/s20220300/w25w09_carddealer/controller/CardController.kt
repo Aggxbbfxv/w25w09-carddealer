@@ -1,16 +1,23 @@
 package kr.ac.kumoh.s20220300.w25w09_carddealer.controller
 
+import kr.ac.kumoh.s20220300.w25w09_carddealer.service.CardService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class CardController {
+class CardController(
+    private val service: CardService
+) {
     @GetMapping("/cards/random")
     fun getRandomCard(model : Model): String {
+        service.dealCards()
+
+        val cards = service.getCards()
+
         model.addAttribute(
             "cards",
-            "ace_of_spades.png"
+            cards.map { it.imageName }
         )
         return "cards"
     }
